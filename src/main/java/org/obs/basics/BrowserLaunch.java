@@ -33,12 +33,14 @@ public class BrowserLaunch {
         //actions on firefox browser
         driver =new FirefoxDriver();
         driver.manage().window().maximize();
+        driver.manage().deleteAllCookies();//for deleting all cockies
         driver.get("https://selenium.obsqurazone.com/index.php");
        String actualTitle= driver.getCurrentUrl();
         System.out.println(actualTitle);
         String actualSourceCode=driver.getPageSource();
         System.out.println(actualSourceCode);
         driver.close();
+
 
     }
 }

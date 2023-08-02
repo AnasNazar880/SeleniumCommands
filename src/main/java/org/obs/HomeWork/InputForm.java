@@ -22,6 +22,7 @@ public class InputForm {
         enterValueBField.sendKeys("9");
         WebElement getTotalButton = driver.findElement(By.cssSelector("#button-two"));
         getTotalButton.click();
+        driver.close();
 
     }
 }

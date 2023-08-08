@@ -12,12 +12,10 @@ public class DemoTours {
         driver.manage().deleteAllCookies();
         driver.get("https://demo.guru99.com/test/newtours/");
         // WebElement yourDestination= driver.findElement(By.linkText("Register here"));
-
         WebElement yourDestination = driver.findElement(By.partialLinkText("Register "));
         List<WebElement> hyperLink = driver.findElements(By.tagName("a"));
         System.out.println(hyperLink.size());
         yourDestination.click();
-
         driver.close();
     }
 }

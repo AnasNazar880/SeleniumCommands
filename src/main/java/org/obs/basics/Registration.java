@@ -8,7 +8,7 @@ public class Registration {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
-        driver.get("https://demo.guru99.com/test/newtours/register.php");
+        driver.get("https://demo.guru99.com/test/newtours/");
         WebElement register = driver.findElement(By.xpath("//a[text()='REGISTER']"));
         register.click();
         // String title=driver.getTitle();
@@ -20,7 +20,7 @@ public class Registration {
         WebElement phone = driver.findElement(By.xpath("//input[@name='phone']"));
         phone.sendKeys("9846749753");
         WebElement email = driver.findElement(By.xpath("//input[@id='userName']"));
-        email.sendKeys("anas@gmail.com");
+        email.sendKeys("anas2@gmail.com");
         WebElement address = driver.findElement(By.xpath("//input[@name='address1']"));
         address.sendKeys("vilayil veedu");
         WebElement city = driver.findElement(By.xpath("//input[@name='city']"));
@@ -37,5 +37,6 @@ public class Registration {
         confirmPass.sendKeys("Izin@2020");
         WebElement submit = driver.findElement(By.xpath("//input[@name='submit']"));
         submit.click();
+        driver.close();
     }
 }

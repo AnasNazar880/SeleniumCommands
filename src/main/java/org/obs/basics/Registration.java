@@ -13,6 +13,7 @@ public class Registration {
         driver.get("https://demo.guru99.com/test/newtours/");
         WebElement register = driver.findElement(By.xpath("//a[text()='REGISTER']"));
         register.click();
+        //method calling
         String fName=RandomData.getFirstName();
         String lName=RandomData.getLastName();
         String pNumber= RandomData.getMobileNumber();
@@ -22,9 +23,8 @@ public class Registration {
         String pinCode1=RandomData.getPinCode();
         String StreetName1=RandomData.getStreetName();
         String passWord1=fName+"@"+lName;
-
         WebElement firstName = driver.findElement(By.xpath("//input[@name='firstName']"));
-        firstName.sendKeys(fName);
+        firstName.sendKeys(fName);//using fake Name by faker
         WebElement lastName = driver.findElement(By.xpath("//input[@name='lastName']"));
         lastName.sendKeys(lName);
         WebElement phone = driver.findElement(By.xpath("//input[@name='phone']"));

@@ -2,6 +2,8 @@ package org.obs.seleniumcommands;
 
 import org.obs.utility.RandomData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -69,11 +71,11 @@ public class BasicCommands extends Base {
         String valueAttributeValue = registerButton.getAttribute("value");
         String classAttributeValue = registerButton.getAttribute("class");
         String typeAttributeValue = registerButton.getAttribute("type");
-        System.out.println(valueAttributeValue);
-        System.out.println(typeAttributeValue);
-        System.out.println(classAttributeValue);
-        String tagName = registerButton.getTagName();
-        System.out.println(tagName);
+        System.out.println("value attribute value of register button:" + valueAttributeValue);
+        System.out.println("type attribute value:" + typeAttributeValue);
+        System.out.println("class attribute value:" + classAttributeValue);
+        String tagName = registerButton.getTagName();//for getting tag name
+        System.out.println("tag name of the registerButton :" + tagName);
     }
 
     @Test
@@ -107,4 +109,77 @@ public class BasicCommands extends Base {
         Assert.assertTrue(afterMaleCheck, "checkbox not selected");
     }
 
+    @Test
+    public void verifyFormSubmit() {
+        driver.get("https://selenium.obsqurazone.com/form-submit.php");
+        String fName2 = RandomData.getFirstName();
+        String lName1 = RandomData.getLastName();
+        String city3 = RandomData.getCity();
+        String state4 = RandomData.getState();
+        String zip3 = RandomData.getPinCode();
+        String username1 = fName2 + lName1;
+        WebElement firstName = driver.findElement(By.xpath("//input[@id='validationCustom01']"));
+        firstName.sendKeys(fName2);
+        WebElement lastName = driver.findElement(By.xpath("//input[@id='validationCustom02']"));
+        lastName.sendKeys(lName1);
+        WebElement city2 = driver.findElement(By.xpath("//input[@id='validationCustom03']"));
+        city2.sendKeys(city3);
+        WebElement state1 = driver.findElement(By.xpath("//input[@id='validationCustom04']"));
+        state1.sendKeys(state4);
+        WebElement zip1 = driver.findElement(By.xpath("//input[@id='validationCustom05']"));
+        zip1.sendKeys(zip3);
+        WebElement userName = driver.findElement(By.xpath("//input[@id='validationCustomUsername']"));
+        userName.sendKeys(username1);
+        // WebElement checkBox=driver.findElement(By.xpath(""))
+        WebElement submit1 = driver.findElement(By.xpath("//button[@class='btn btn-primary']"));
+        //submit1.click();
+        submit1.submit();
+    }
+
+    @Test
+    public void verifyCssValue() {
+        driver.get("https://selenium.obsqurazone.com/select-input.php");
+        WebElement getFirstSelectedButton = driver.findElement(By.xpath("//button[@id='button-first']"));
+        String buttonColour = getFirstSelectedButton.getCssValue("background-color");
+        System.out.println("the colour of the getFirstSelected button is :" + buttonColour);
+        String buttonFondFamily=getFirstSelectedButton.getCssValue("font-family");
+        System.out.println("the fond family of the button is :"+buttonFondFamily);
+        String borderColor=getFirstSelectedButton.getCssValue("border-color");
+        System.out.println("the border color is: "+borderColor);
+
+    }
+    @Test
+    public  void verifyLocation(){
+        driver.get("https://selenium.obsqurazone.com/simple-form-demo.php");
+        WebElement showMessageButton=driver.findElement(By.xpath("//button[@id='button-one']"));
+        Point location=showMessageButton.getLocation();
+        System.out.println("Element location:("+location.getX()+","+location.getY()+")");
+    }
+    @Test
+    public void verifyGetSize(){
+        driver.get("https://selenium.obsqurazone.com/radio-button-demo.php");
+        WebElement button=driver.findElement(By.xpath("//button[@id='button-one']"));
+        Dimension sizeOfButton= button.getSize();
+        System.out.println("the size of the button:("+sizeOfButton.getWidth()+","+sizeOfButton.getHeight()+")");
+    }
+
+
+
+    @Test
+    public void verifyNavigationCommands() throws InterruptedException {
+        // driver.get("https://demowebshop.tricentis.com/");
+        driver.navigate().to("https://demowebshop.tricentis.com/");
+        WebElement register = driver.findElement(By.xpath("//div[@class='header-links']//a[@class='ico-register']"));
+        register.click();
+        driver.navigate().back();
+        driver.navigate().forward();
+        WebElement fName = driver.findElement(By.xpath("//input[@id='FirstName']"));
+        fName.sendKeys("anas");
+        WebElement lastName = driver.findElement(By.xpath("//input[@id='LastName']"));
+        lastName.sendKeys("izin");
+        WebElement eMail = driver.findElement(By.xpath("//input[@id='Email']"));
+        eMail.sendKeys("anas@gmail.com");
+        driver.navigate().refresh();
+        driver.navigate().to("https://demowebshop.tricentis.com/cart");
+    }
 }

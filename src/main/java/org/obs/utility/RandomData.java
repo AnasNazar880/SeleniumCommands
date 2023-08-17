@@ -41,5 +41,7 @@ public class RandomData {
         String PinCode=faker.address().zipCode();
         return PinCode;
     }
+
+
 }
 

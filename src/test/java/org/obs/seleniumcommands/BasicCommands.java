@@ -1,5 +1,6 @@
 package org.obs.seleniumcommands;
 
+import org.checkerframework.framework.qual.DefaultQualifier;
 import org.obs.utility.RandomData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -7,6 +8,8 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class BasicCommands extends Base {
     @Test
@@ -142,27 +145,28 @@ public class BasicCommands extends Base {
         WebElement getFirstSelectedButton = driver.findElement(By.xpath("//button[@id='button-first']"));
         String buttonColour = getFirstSelectedButton.getCssValue("background-color");
         System.out.println("the colour of the getFirstSelected button is :" + buttonColour);
-        String buttonFondFamily=getFirstSelectedButton.getCssValue("font-family");
-        System.out.println("the fond family of the button is :"+buttonFondFamily);
-        String borderColor=getFirstSelectedButton.getCssValue("border-color");
-        System.out.println("the border color is: "+borderColor);
+        String buttonFondFamily = getFirstSelectedButton.getCssValue("font-family");
+        System.out.println("the fond family of the button is :" + buttonFondFamily);
+        String borderColor = getFirstSelectedButton.getCssValue("border-color");
+        System.out.println("the border color is: " + borderColor);
 
     }
+
     @Test
-    public  void verifyLocation(){
+    public void verifyLocation() {
         driver.get("https://selenium.obsqurazone.com/simple-form-demo.php");
-        WebElement showMessageButton=driver.findElement(By.xpath("//button[@id='button-one']"));
-        Point location=showMessageButton.getLocation();
-        System.out.println("Element location:("+location.getX()+","+location.getY()+")");
-    }
-    @Test
-    public void verifyGetSize(){
-        driver.get("https://selenium.obsqurazone.com/radio-button-demo.php");
-        WebElement button=driver.findElement(By.xpath("//button[@id='button-one']"));
-        Dimension sizeOfButton= button.getSize();
-        System.out.println("the size of the button:("+sizeOfButton.getWidth()+","+sizeOfButton.getHeight()+")");
+        WebElement showMessageButton = driver.findElement(By.xpath("//button[@id='button-one']"));
+        Point location = showMessageButton.getLocation();
+        System.out.println("Element location:(" + location.getX() + "," + location.getY() + ")");
     }
 
+    @Test
+    public void verifyGetSize() {
+        driver.get("https://selenium.obsqurazone.com/radio-button-demo.php");
+        WebElement button = driver.findElement(By.xpath("//button[@id='button-one']"));
+        Dimension sizeOfButton = button.getSize();
+        System.out.println("the size of the button:(" + sizeOfButton.getWidth() + "," + sizeOfButton.getHeight() + ")");
+    }
 
 
     @Test
@@ -182,4 +186,44 @@ public class BasicCommands extends Base {
         driver.navigate().refresh();
         driver.navigate().to("https://demowebshop.tricentis.com/cart");
     }
+
+    @Test
+    public void verifySelectGender() {
+        driver.get("https://demowebshop.tricentis.com/register");
+        List<WebElement> genders = driver.findElements(By.xpath("//input[@name='Gender']"));
+        selectGender("female", genders);
+    }
+
+    public void selectGender(String gender, List<WebElement> genders) {
+        for (int i = 0; i < genders.size(); i++) {
+            WebElement gen = genders.get(i);
+            String idAttributeValue = gen.getAttribute("id");
+            if (idAttributeValue.contains("gender")) {
+                gen.click();
+                break;
+
+            }
+        }
+    }
+
+    @Test
+    public void verifyPanelSelection() {
+        driver.get("https://demo.guru99.com/test/newtours/register.php");
+        List<WebElement> panels = driver.findElements(By.xpath("//a[@style='margin-left: 5px;color: #0000ee;text-decoration: underline;'] "));
+        selectPanel("Flights", panels);
+    }
+
+    public void selectPanel(String panel, List<WebElement> panels) {
+        for (int i = 0; i < panels.size(); i++) {
+            WebElement panel1 = panels.get(i);
+            String tagValue = panel1.getText();
+            if (tagValue.contains(panel)) {
+                panel1.click();
+                break;
+            }
+
+        }
+    }
+
 }
+

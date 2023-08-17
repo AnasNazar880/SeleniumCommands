@@ -25,16 +25,20 @@ public class ListPrograms {
             //System.out.println("the index of ruby is :"+r);
             //languages.add("HTMl");
             System.out.println("the updated list is :" + languages);
-            ;
+
         }
         Iterator itr = languages.iterator();//getting elements through iterator
         while (itr.hasNext()) {
             System.out.println(itr.next());
         }
+        for(int i=0;i<languages.size();i++){
+            System.out.println(languages.get(i));
+        }
         System.out.println();
-        for (String i : languages) //getting elements through the for loop
+        for(String i: languages)
             System.out.println(i);
     }
+
 }
 
 

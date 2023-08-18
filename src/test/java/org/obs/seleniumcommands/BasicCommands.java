@@ -2,10 +2,7 @@ package org.obs.seleniumcommands;
 
 import org.checkerframework.framework.qual.DefaultQualifier;
 import org.obs.utility.RandomData;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -209,7 +206,7 @@ public class BasicCommands extends Base {
     @Test
     public void verifyPanelSelection() {
         driver.get("https://demo.guru99.com/test/newtours/register.php");
-        List<WebElement> panels = driver.findElements(By.xpath("//a[@style='margin-left: 5px;color: #0000ee;text-decoration: underline;'] "));
+        List<WebElement> panels = driver.findElements(By.xpath("//table/tbody//tr[contains(@class,'mouse')]//a"));
         selectPanel("Flights", panels);
     }
 
@@ -217,7 +214,7 @@ public class BasicCommands extends Base {
         for (int i = 0; i < panels.size(); i++) {
             WebElement panel1 = panels.get(i);
             String tagValue = panel1.getText();
-            if (tagValue.contains(panel)) {
+            if (tagValue.equals(panel)) {
                 panel1.click();
                 break;
             }
@@ -225,5 +222,109 @@ public class BasicCommands extends Base {
         }
     }
 
+    @Test
+    public void verifyDiffrenceBtFindelementAndFindElements() {
+        driver.get("https://demo.guru99.com/test/newtours/register.php");
+        // WebElement panel = driver.findElement(By.xpath("//table/tbody//tr[contains(@class,'mouse123')]//a"));
+        List<WebElement> panels = driver.findElements(By.xpath("//table/tbody//tr[contains(@class,'mouse123')]//a"));
+        System.out.println(panels.size());
+    }
+
+    @Test
+    public void verifySimpleAlerts() {
+        driver.get("https://demoqa.com/alerts");
+        WebElement clickButton = driver.findElement(By.xpath("//button[@id='alertButton']"));
+        clickButton.click();
+        Alert alert = driver.switchTo().alert();//switching to alert
+        String alertText = alert.getText();
+        System.out.println(alertText);
+        alert.accept();
+    }
+
+    @Test
+    public void verifyConfirmationAlertOkButton() throws InterruptedException {
+        driver.get("https://demoqa.com/alerts");
+        WebElement confAlertOk = driver.findElement(By.xpath("//button[@id='timerAlertButton']"));
+        confAlertOk.click();
+        Thread.sleep(10000);
+        Alert alert = driver.switchTo().alert();
+        String confAlertText = alert.getText();
+        System.out.println(confAlertText);
+        alert.accept();
+
+    }
+
+    @Test
+    public void verifyconfirAlertDeleteButton() throws InterruptedException {
+        driver.get("https://demoqa.com/alerts");
+        WebElement confirAlertDelete = driver.findElement(By.xpath("//button[@id='confirmButton']"));
+        confirAlertDelete.click();
+        Thread.sleep(10000);
+        Alert alert = driver.switchTo().alert();
+        String deleteAlertText = alert.getText();
+        System.out.println(deleteAlertText);
+        alert.dismiss();
+
+    }
+
+    @Test
+    public void verifyPromptButton() throws InterruptedException {
+        driver.get("https://demoqa.com/alerts");
+        WebElement promptButton = driver.findElement(By.xpath("//button[@id='promtButton']"));
+        promptButton.click();
+        Thread.sleep(10000);
+        Alert alert = driver.switchTo().alert();
+        String promptAlertText = alert.getText();
+        System.out.println(promptAlertText);
+        alert.sendKeys("my name is Anas");
+       // alert.accept();
+
+    }
+    @Test
+    public void verifySimpleAlert() throws InterruptedException {
+        driver.get("https://selenium.obsqurazone.com/javascript-alert.php");
+        WebElement clickButton=driver.findElement(By.xpath("//button[@class='btn btn-success']"));
+        clickButton.click();
+        Thread.sleep(10000);
+        Alert alert=driver.switchTo().alert();
+        String simpleAlertText=alert.getText();
+        System.out.println(simpleAlertText);
+        alert.accept();
+    }
+    @Test
+    public void verifyConfirAlertOkButton() throws InterruptedException {
+        driver.get("https://selenium.obsqurazone.com/javascript-alert.php");
+        WebElement confAlertOk=driver.findElement(By.xpath("//button[@class='btn btn-warning']"));
+        confAlertOk.click();
+        Thread.sleep(10000);
+        Alert alert=driver.switchTo().alert();
+        String confAlertText=alert.getText();
+        System.out.println(confAlertText);
+        alert.accept();
+    }
+    @Test
+    public void verifyConfAlertDelete() throws InterruptedException {
+        driver.get("https://selenium.obsqurazone.com/javascript-alert.php");
+        WebElement confAlertDelete=driver.findElement(By.xpath("//button[@class='btn btn-warning']"));
+        confAlertDelete.click();
+        Thread.sleep(10000);
+        Alert alert=driver.switchTo().alert();
+        String alertDeleteText=alert.getText();
+        System.out.println(alertDeleteText);
+        alert.dismiss();
+    }
+    @Test
+    public void verifyPromptAlert() throws InterruptedException {
+        driver.get("https://selenium.obsqurazone.com/javascript-alert.php");
+        WebElement promptButton=driver.findElement(By.xpath("//button[@class='btn btn-danger']"));
+        promptButton.click();
+        Thread.sleep(10000);
+        Alert alert=driver.switchTo().alert();
+        String promAlertText=alert.getText();
+        System.out.println(promAlertText);
+        alert.sendKeys( "i am anas");
+        alert.accept();
+        Thread.sleep(10000);
+    }
 }
 

@@ -1,18 +1,19 @@
 package org.obs.seleniumcommands;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 public class Base {
     public WebDriver driver;
 
     public void initializeTest(String browser) {
         if (browser.equals("chrome")) {
+            WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
         } else if (browser.equals("edge")) {
             driver = new EdgeDriver();
@@ -25,13 +26,16 @@ public class Base {
         driver.manage().window().maximize();
 
     }
+
     @BeforeMethod
-    public void setUp(){
+    public void setUp() {
         initializeTest("chrome");
     }
+
     @AfterMethod
-    public void tearDown(){
-  driver.close();;
+    public void tearDown() {
+        //driver.quit();
+        driver.close();
     }
 
 }

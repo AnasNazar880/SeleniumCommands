@@ -1,12 +1,15 @@
 package org.obs.seleniumcommands;
 
+import org.bouncycastle.util.Arrays;
 import org.checkerframework.framework.qual.DefaultQualifier;
 import org.obs.utility.RandomData;
 import org.openqa.selenium.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class BasicCommands extends Base {
     @Test
@@ -277,54 +280,131 @@ public class BasicCommands extends Base {
         String promptAlertText = alert.getText();
         System.out.println(promptAlertText);
         alert.sendKeys("my name is Anas");
-       // alert.accept();
+        // alert.accept();
 
     }
+
     @Test
     public void verifySimpleAlert() throws InterruptedException {
         driver.get("https://selenium.obsqurazone.com/javascript-alert.php");
-        WebElement clickButton=driver.findElement(By.xpath("//button[@class='btn btn-success']"));
+        WebElement clickButton = driver.findElement(By.xpath("//button[@class='btn btn-success']"));
         clickButton.click();
         Thread.sleep(10000);
-        Alert alert=driver.switchTo().alert();
-        String simpleAlertText=alert.getText();
+        Alert alert = driver.switchTo().alert();
+        String simpleAlertText = alert.getText();
         System.out.println(simpleAlertText);
         alert.accept();
     }
+
     @Test
     public void verifyConfirAlertOkButton() throws InterruptedException {
         driver.get("https://selenium.obsqurazone.com/javascript-alert.php");
-        WebElement confAlertOk=driver.findElement(By.xpath("//button[@class='btn btn-warning']"));
+        WebElement confAlertOk = driver.findElement(By.xpath("//button[@class='btn btn-warning']"));
         confAlertOk.click();
         Thread.sleep(10000);
-        Alert alert=driver.switchTo().alert();
-        String confAlertText=alert.getText();
+        Alert alert = driver.switchTo().alert();
+        String confAlertText = alert.getText();
         System.out.println(confAlertText);
         alert.accept();
     }
+
     @Test
     public void verifyConfAlertDelete() throws InterruptedException {
         driver.get("https://selenium.obsqurazone.com/javascript-alert.php");
-        WebElement confAlertDelete=driver.findElement(By.xpath("//button[@class='btn btn-warning']"));
+        WebElement confAlertDelete = driver.findElement(By.xpath("//button[@class='btn btn-warning']"));
         confAlertDelete.click();
         Thread.sleep(10000);
-        Alert alert=driver.switchTo().alert();
-        String alertDeleteText=alert.getText();
+        Alert alert = driver.switchTo().alert();
+        String alertDeleteText = alert.getText();
         System.out.println(alertDeleteText);
         alert.dismiss();
     }
+
     @Test
     public void verifyPromptAlert() throws InterruptedException {
         driver.get("https://selenium.obsqurazone.com/javascript-alert.php");
-        WebElement promptButton=driver.findElement(By.xpath("//button[@class='btn btn-danger']"));
+        WebElement promptButton = driver.findElement(By.xpath("//button[@class='btn btn-danger']"));
         promptButton.click();
         Thread.sleep(10000);
-        Alert alert=driver.switchTo().alert();
-        String promAlertText=alert.getText();
+        Alert alert = driver.switchTo().alert();
+        String promAlertText = alert.getText();
         System.out.println(promAlertText);
-        alert.sendKeys( "i am anas");
+        alert.sendKeys("i am anas");
         alert.accept();
-        Thread.sleep(10000);
+    }
+
+    @Test
+    public void verifyUserEdit() {
+        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+        WebElement userName = driver.findElement(By.xpath("//input[@class='oxd-input oxd-input--active'and @name='username']"));
+        userName.sendKeys("Admin");
+        WebElement passWord = driver.findElement(By.xpath("//input[@class='oxd-input oxd-input--active' and @name='password']"));
+        passWord.sendKeys("admin123");
+        WebElement loginButton = driver.findElement(By.xpath("//button[@class='oxd-button oxd-button--medium oxd-button--main orangehrm-login-button']"));
+        loginButton.click();
+        List<WebElement> panels = driver.findElements(By.xpath("//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name']"));
+        selectPanels("Admin", panels);
+        List<WebElement> admins = driver.findElements(By.xpath("//div[@class='oxd-table-card']"));
+        String targetAdminName = driver.findElement(By.xpath("//div[@class='oxd-table-card'][2]/div[@class='oxd-table-row oxd-table-row--with-border']/div[@class='oxd-table-cell oxd-padding-cell'][2]")).getText();
+
+        WebElement editButton = driver.findElement(By.xpath("//div[@class='oxd-table-card'][2]/div[@class='oxd-table-row oxd-table-row--with-border']/div[@class='oxd-table-cell oxd-padding-cell']/div[@class='oxd-table-cell-actions']/button/i[@class='oxd-icon bi-pencil-fill']"));
+        editButton.click();
+        WebElement targetAdminElement = findAdminElementByUseName(admins, targetAdminName);
+        WebElement employeeName = driver.findElement(By.xpath("//div[@class='oxd-autocomplete-text-input oxd-autocomplete-text-input--active']"));
+        employeeName.sendKeys("Abdulsamad123");
+        WebElement submitButton = driver.findElement(By.xpath("//button[@class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space']"));
+        submitButton.click();
+        if (targetAdminElement != null) {
+            targetAdminElement.click();
+            // Perform actions on the selected admin's profile page
+        } else {
+            System.out.println("Admin not found: " + targetAdminName);
+        }
+
+    }
+
+    public void selectPanels(String panel, List<WebElement> panels) {
+        for (int i = 0; i < panels.size(); i++) {
+            WebElement panel1 = panels.get(i);
+            String tagValue = panel1.getText();
+            if (tagValue.equals(panel)) {
+                panel1.click();
+                break;
+            }
+
+        }
+    }
+
+    public WebElement findAdminElementByUseName(List<WebElement> admins, String adminName) {
+        for (WebElement adminElement : admins) {
+            if (adminElement.getText().equals(adminName)) {
+                return adminElement;
+            }
+        }
+        return null; // Admin not found
+    }
+
+    @Test
+    public void verifyMultipleWindowHandling() {
+        driver.get("https://demo.guru99.com/popup.php");
+        String parentWindow = driver.getWindowHandle();//for getting handle id of parent window
+        WebElement clickHereButton = driver.findElement(By.xpath("//a[text()='Click Here']"));
+        clickHereButton.click();
+        Set<String>windowHandles = driver.getWindowHandles();
+        Iterator<String> itr = windowHandles.iterator();
+        while (itr.hasNext()) {
+            String element = itr.next();
+            if (!parentWindow.equals(element)) {//element is for getting child window handle id.
+                driver.switchTo().window(element);//divert atention to child window
+                WebElement email=driver.findElement(By.xpath("//input[@name='emailid']"));
+                email.sendKeys("anas.tuv@gmail.com");
+                WebElement submitButton=driver.findElement(By.xpath("//input[@name='btnLogin']"));
+                submitButton.click();
+                driver.close();//for closing child window
+            }
+        }
+        driver.switchTo().window(parentWindow);//to divert attention from child window to parent window
     }
 }
+
 

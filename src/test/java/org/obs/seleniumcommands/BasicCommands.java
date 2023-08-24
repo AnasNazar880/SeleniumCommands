@@ -4,6 +4,7 @@ import org.bouncycastle.util.Arrays;
 import org.checkerframework.framework.qual.DefaultQualifier;
 import org.obs.utility.RandomData;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -384,27 +385,81 @@ public class BasicCommands extends Base {
         return null; // Admin not found
     }
 
-    @Test
+    @Test//most important
     public void verifyMultipleWindowHandling() {
         driver.get("https://demo.guru99.com/popup.php");
         String parentWindow = driver.getWindowHandle();//for getting handle id of parent window
         WebElement clickHereButton = driver.findElement(By.xpath("//a[text()='Click Here']"));
         clickHereButton.click();
-        Set<String>windowHandles = driver.getWindowHandles();
+        Set<String> windowHandles = driver.getWindowHandles();
         Iterator<String> itr = windowHandles.iterator();
         while (itr.hasNext()) {
             String element = itr.next();
             if (!parentWindow.equals(element)) {//element is for getting child window handle id.
                 driver.switchTo().window(element);//divert atention to child window
-                WebElement email=driver.findElement(By.xpath("//input[@name='emailid']"));
+                WebElement email = driver.findElement(By.xpath("//input[@name='emailid']"));
                 email.sendKeys("anas.tuv@gmail.com");
-                WebElement submitButton=driver.findElement(By.xpath("//input[@name='btnLogin']"));
+                WebElement submitButton = driver.findElement(By.xpath("//input[@name='btnLogin']"));
                 submitButton.click();
                 driver.close();//for closing child window
             }
         }
         driver.switchTo().window(parentWindow);//to divert attention from child window to parent window
     }
+
+    @Test
+    public void validateCountryDropDownValues() {
+        driver.get("https://demo.guru99.com/test/newtours/register.php");
+        WebElement countryDropDown = driver.findElement(By.xpath("//select[@name='country']"));
+        Select select = new Select(countryDropDown);
+        //select.selectByVisibleText("INDIA");
+        //select.selectByValue("INDIA");
+        select.selectByIndex(43);
+        List<WebElement> dropdownValues = select.getOptions();
+        int size = dropdownValues.size();
+        System.out.println("The size of the list is :" + size);
+//        Iterator<WebElement>itr=dropdownValues.iterator();
+//        while(itr.hasNext()){
+//            WebElement dropDown= itr.next();
+//            String countryNames=dropDown.getText();
+//            System.out.println(countryNames);
+//        }
+        for (int i = 0; i < size; i++) {
+            WebElement dropDown = dropdownValues.get(i);
+            String countryName = dropDown.getText();
+            System.out.println(countryName);
+        }
+    }
+
+    @Test
+    public void valueCountrySelector() {
+        driver.get("https://demo.guru99.com/test/newtours/register.php");
+        WebElement countryDropDown = driver.findElement(By.xpath("//select[@name='country']"));
+        Select select = new Select(countryDropDown);
+        List<WebElement> dropDownValues = select.getOptions();
+        int size = dropDownValues.size();
+        selectCountry("AUSTRIA", dropDownValues);
+
+    }
+
+    public void selectCountry(String country, List<WebElement> dropDownValues) {
+        boolean countryFound = false;
+        for (int i = 0; i < dropDownValues.size(); i++) {
+            WebElement dropValue = dropDownValues.get(i);
+            String countryNames = dropValue.getText();
+            if (countryNames.equals(country)) {
+                dropValue.click();
+                countryFound = true;
+                break;
+            }
+        }
+        if (!countryFound) {
+            System.out.println("The selected country not in the list");
+        }
+
+    }
 }
+
+
 
 

@@ -35,7 +35,7 @@ public class Base {
     @AfterMethod
     public void tearDown() {
         //driver.quit();
-        driver.close();
+        //driver.close();//for closing parent window in multiple window handling
     }
 
 }

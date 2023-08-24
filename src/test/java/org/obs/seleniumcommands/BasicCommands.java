@@ -438,25 +438,68 @@ public class BasicCommands extends Base {
         Select select = new Select(countryDropDown);
         List<WebElement> dropDownValues = select.getOptions();
         int size = dropDownValues.size();
-        selectCountry("AUSTRIA", dropDownValues);
-
+        String countryToSelect = "AUSTRIA";
+        selectCountry(countryToSelect, dropDownValues, select);
+        WebElement selectedValue = select.getFirstSelectedOption();
+        String actualSelectedValue = selectedValue.getText();
+        Assert.assertEquals(actualSelectedValue, countryToSelect, "country not selected");
     }
 
-    public void selectCountry(String country, List<WebElement> dropDownValues) {
+    public void selectCountry(String country, List<WebElement> dropDownValues, Select select) {
         boolean countryFound = false;
         for (int i = 0; i < dropDownValues.size(); i++) {
             WebElement dropValue = dropDownValues.get(i);
             String countryNames = dropValue.getText();
             if (countryNames.equals(country)) {
-                dropValue.click();
+                select.selectByValue(country);
                 countryFound = true;
                 break;
             }
         }
         if (!countryFound) {
-            System.out.println("The selected country not in the list");
+            throw new RuntimeException("The selected country is  not in the dropdown");
         }
 
+    }
+
+    @Test
+    public void validateDeSelect() {
+        driver.get("https://chercher.tech/practice/practice-dropdowns-selenium-webdriver");
+        WebElement countryDropDown = driver.findElement(By.xpath("//select[@id='second']"));
+        Select select = new Select(countryDropDown);
+        boolean isMultiple = select.isMultiple();
+        Assert.assertTrue(isMultiple, "given dropdown is not a multiselect");
+        select.selectByVisibleText("Pizza");
+        select.selectByVisibleText("Donut");
+        //select.deselectAll();
+        //select.deselectByVisibleText("Pizza");
+        List<WebElement> options = select.getAllSelectedOptions();
+        for (int i = 0; i < options.size(); i++) {
+            WebElement option = options.get(i);
+            String dropdown = option.getText();
+            System.out.println(dropdown);
+        }
+    }
+
+    @Test
+    public void selectDropDown() {
+        driver.get("http://seleniumpractise.blogspot.com/2016/08/bootstrap-dropdown-example-for-selenium.html");
+        WebElement tutorialsButton = driver.findElement(By.xpath("//button[@id='menu1']"));
+        tutorialsButton.click();
+        List<WebElement> options = driver.findElements(By.xpath("//a[@role='menuitem']"));
+        selectValue("HTML", options);
+    }
+
+    public void selectValue(String selectedOption, List<WebElement> options) {
+        for (int i = 0; i < options.size(); i++) {
+            WebElement option = options.get(i);
+            String dropDown = option.getText();
+            if(!dropDown.equals(selectedOption)){
+                option.click();
+                break;
+            }
+
+        }
     }
 }
 

@@ -11,12 +11,6 @@ public class RadioButtonDemo extends Base {
         List<WebElement> genders = driver.findElements(By.xpath("//input[@name='inlineRadioOptions']/following-sibling::label"));
         String genderToSelect = "Male";
         selectGender(genderToSelect, genders);
-        WebElement selectGen = driver.findElement(By.xpath("//input[@id='inlineRadio11']//following-sibling::label"));
-        String actualGender = selectGen.getText();
-        Assert.assertTrue(actualGender.contains("male"), "selected gender should be male");
-        WebElement selectAge = driver.findElement(By.xpath("//input[@id='inlineRadio23']//following-sibling::label"));
-        String actualAgeSelected = selectAge.getText();
-        Assert.assertTrue(actualAgeSelected.contains("19 t0 44"), "selected age should be 19-44");
     }
 
     public void selectGender(String gender, List<WebElement> genders) {
@@ -37,6 +31,12 @@ public class RadioButtonDemo extends Base {
         List<WebElement> patientGender = driver.findElements(By.xpath("//input[@name='student-gender']//following-sibling::label"));
         List<WebElement> patientAgeGroup = driver.findElements(By.xpath("//input[@name='student-age']//following-sibling::label"));
         selectGroupRadioButton("Male", "19 t0 44", patientGender, patientAgeGroup);
+        WebElement selectGen = driver.findElement(By.xpath("//input[@id='inlineRadio11']//following-sibling::label"));
+        String actualGender = selectGen.getText();
+        Assert.assertTrue(actualGender.contains("male"), "selected gender should be male");
+        WebElement selectAge = driver.findElement(By.xpath("//input[@id='inlineRadio23']//following-sibling::label"));
+        String actualAgeSelected = selectAge.getText();
+        Assert.assertTrue(actualAgeSelected.contains("19 t0 44"), "selected age should be 19-44");
     }
 
     public void selectGroupRadioButton(String gender, String ageGroup, List<WebElement> patientGender, List<WebElement> patientAgeGroup) {

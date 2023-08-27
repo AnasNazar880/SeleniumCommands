@@ -4,7 +4,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.util.List;
-
 public class RadioButtonDemo extends Base {
     @Test
     public void radioButtonDemo() {
@@ -12,6 +11,12 @@ public class RadioButtonDemo extends Base {
         List<WebElement> genders = driver.findElements(By.xpath("//input[@name='inlineRadioOptions']/following-sibling::label"));
         String genderToSelect = "Male";
         selectGender(genderToSelect, genders);
+        WebElement selectGen = driver.findElement(By.xpath("//input[@id='inlineRadio11']//following-sibling::label"));
+        String actualGender = selectGen.getText();
+        Assert.assertTrue(actualGender.contains("male"), "selected gender should be male");
+        WebElement selectAge = driver.findElement(By.xpath("//input[@id='inlineRadio23']//following-sibling::label"));
+        String actualAgeSelected = selectAge.getText();
+        Assert.assertTrue(actualAgeSelected.contains("19 t0 44"), "selected age should be 19-44");
     }
 
     public void selectGender(String gender, List<WebElement> genders) {
@@ -31,8 +36,7 @@ public class RadioButtonDemo extends Base {
         driver.get("https://selenium.obsqurazone.com/radio-button-demo.php");
         List<WebElement> patientGender = driver.findElements(By.xpath("//input[@name='student-gender']//following-sibling::label"));
         List<WebElement> patientAgeGroup = driver.findElements(By.xpath("//input[@name='student-age']//following-sibling::label"));
-        selectGroupRadioButton("Male","19 t0 44",patientGender,patientAgeGroup);
-
+        selectGroupRadioButton("Male", "19 t0 44", patientGender, patientAgeGroup);
     }
 
     public void selectGroupRadioButton(String gender, String ageGroup, List<WebElement> patientGender, List<WebElement> patientAgeGroup) {
@@ -42,14 +46,14 @@ public class RadioButtonDemo extends Base {
 
     public void selectRadioButton(String option, List<WebElement> radioButtons) {
         for (WebElement radioButton : radioButtons) {
-            String labelText = radioButton.getText();
-            if (labelText.equalsIgnoreCase(option)) {
+            String actualOptions = radioButton.getText();
+            if (actualOptions.equalsIgnoreCase(option)) {
                 radioButton.click();
             }
-
         }
-        WebElement getResultsButton=driver.findElement(By.xpath("//button[@id='button-two']"));
+        WebElement getResultsButton = driver.findElement(By.xpath("//button[@id='button-two']"));
         getResultsButton.click();
-
     }
 }
+
+

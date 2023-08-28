@@ -29,7 +29,7 @@ public class CheckBoxDemo extends Base {
         for (int i = 0; i < numberOfOptions; i++) {
             WebElement checkBoxes = multipleCheckBox.get(i);
             String actualOptions = checkBoxes.getText();
-            Assert.assertEquals(actualOptions, expectedOptions[i], "the options are not matching");
+            Assert.assertEquals(actualOptions, expectedOptions[i], "the options are not selected");
             if (actualOptions.equals(checkBoxOne)) {
                 checkBoxes.click();
                 break;
@@ -42,7 +42,7 @@ public class CheckBoxDemo extends Base {
         for (int i = 0; i < numberOfOptions; i++) {
             WebElement checkbox = multipleCheckBox.get(i);
             String actualOptions = checkbox.getText();
-            Assert.assertEquals(actualOptions, expectedOptions[i], "the options are not matching");
+            Assert.assertEquals(actualOptions, expectedOptions[i], "the options are not selected");
             if (actualOptions.equals(checkBoxOne) || actualOptions.equals(checkBoxTwo)) {
                 checkbox.click();
             }
@@ -54,7 +54,7 @@ public class CheckBoxDemo extends Base {
         for (int i = 0; i < numberOfOptions; i++) {
             WebElement checkbox = multipleCheckBox.get(i);
             String actualOptions = checkbox.getText();
-            Assert.assertEquals(actualOptions, expectedOptions[i], "options are not matching");
+            Assert.assertEquals(actualOptions, expectedOptions[i], "options are not selected");
             if (actualOptions.equals(checkBoxOne) || actualOptions.equals(checkBoxTwo) || actualOptions.equals(checkboxThree)) {
                 checkbox.click();
             }
@@ -66,7 +66,7 @@ public class CheckBoxDemo extends Base {
         for (int i = 0; i < multipleCheckBox.size(); i++) {
             WebElement checkBox = multipleCheckBox.get(i);
             String actualOptions = checkBox.getText();
-            Assert.assertEquals(actualOptions, expectedOptions[i], "the options are not matching");
+            Assert.assertEquals(actualOptions, expectedOptions[i], "the options are not selected");
             if (actualOptions.equals(checkBoxOne) || actualOptions.equals(checkBoxTwo) || actualOptions.equals(checkboxThree) || actualOptions.equals(checkBoxFour)) {
                 checkBox.click();
             }

@@ -50,7 +50,6 @@ public class SelectInputDemo extends Base {
             WebElement colour = colours.get(i);
             String actualColours = colour.getText();
             Assert.assertEquals(actualColours, expectedColours[i], "Selected Colour does not match with actual colour");
-
         }
     }
 }

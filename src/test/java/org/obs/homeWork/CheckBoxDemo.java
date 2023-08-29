@@ -59,8 +59,8 @@ public class CheckBoxDemo extends Base {
                 checkbox.click();
             }
         }
-    }}
-    /*public void selectMultipleCheck(String checkBoxOne, String checkBoxTwo, String checkboxThree, String checkBoxFour, List<WebElement> multipleCheckBox) {
+    }
+    public void selectMultipleCheck(String checkBoxOne, String checkBoxTwo, String checkboxThree, String checkBoxFour, List<WebElement> multipleCheckBox) {
         String[] expectedOptions = {"Check Box One", "Check Box Two", "Check Box Three", "Check Box Four"};
         int numberOfOptions = Math.min(expectedOptions.length, multipleCheckBox.size());
         for (int i = 0; i < multipleCheckBox.size(); i++) {

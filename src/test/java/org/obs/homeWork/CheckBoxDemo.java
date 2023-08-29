@@ -18,12 +18,12 @@ public class CheckBoxDemo extends Base {
     public void multipleCheckBoxDemo() {
         driver.get("https://selenium.obsqurazone.com/check-box-demo.php");
         List<WebElement> multipleCheckBox = driver.findElements(By.xpath("//input[@class='check-box-list']/ following-sibling::label"));
-        //  selectMultipleCheck("Check Box One", multipleCheckBox);
+          selectMultipleCheck("Check Box One", multipleCheckBox);
         selectMultipleCheck("Check Box One", "Check Box Two", multipleCheckBox);
-       // selectMultipleCheck("Check Box One", "Check Box Two", "Check Box Three", multipleCheckBox);
-       // selectMultipleCheck("Check Box One", "Check Box Two", "Check Box Three", "Check Box Four", multipleCheckBox);
+        selectMultipleCheck("Check Box One", "Check Box Two", "Check Box Three", multipleCheckBox);
+        selectMultipleCheck("Check Box One", "Check Box Two", "Check Box Three", "Check Box Four", multipleCheckBox);
     }
-  /*  public void selectMultipleCheck(String checkBoxOne, List<WebElement> multipleCheckBox) {
+   public void selectMultipleCheck(String checkBoxOne, List<WebElement> multipleCheckBox) {
         String[] expectedOptions = {"Check Box One"};
         int numberOfOptions = Math.min(expectedOptions.length, multipleCheckBox.size());
         for (int i = 0; i < numberOfOptions; i++) {
@@ -35,7 +35,7 @@ public class CheckBoxDemo extends Base {
                 break;
             }
         }
-    }*/
+    }
     public void selectMultipleCheck(String checkBoxOne, String checkBoxTwo, List<WebElement> multipleCheckBox) {
         String[] expectedOptions = {"Check Box One", "Check Box Two"};
         int numberOfOptions = Math.min(expectedOptions.length, multipleCheckBox.size());
@@ -48,7 +48,7 @@ public class CheckBoxDemo extends Base {
             }
         }
     }
-   /* public void selectMultipleCheck(String checkBoxOne, String checkBoxTwo, String checkboxThree, List<WebElement> multipleCheckBox) {
+    public void selectMultipleCheck(String checkBoxOne, String checkBoxTwo, String checkboxThree, List<WebElement> multipleCheckBox) {
         String[] expectedOptions = {"Check Box One", "Check Box Two", "Check Box Three"};
         int numberOfOptions = Math.min(expectedOptions.length, multipleCheckBox.size());
         for (int i = 0; i < numberOfOptions; i++) {
@@ -59,7 +59,7 @@ public class CheckBoxDemo extends Base {
                 checkbox.click();
             }
         }
-    }*/
+    }}
     /*public void selectMultipleCheck(String checkBoxOne, String checkBoxTwo, String checkboxThree, String checkBoxFour, List<WebElement> multipleCheckBox) {
         String[] expectedOptions = {"Check Box One", "Check Box Two", "Check Box Three", "Check Box Four"};
         int numberOfOptions = Math.min(expectedOptions.length, multipleCheckBox.size());
@@ -71,5 +71,5 @@ public class CheckBoxDemo extends Base {
                 checkBox.click();
             }
         }
-    }*/
+    }
 }

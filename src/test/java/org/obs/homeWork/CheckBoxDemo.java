@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CheckBoxDemo extends Base {
     @Test
-    public void singleCheckBox() {
+    public void verifySingleCheckBox() {
         driver.get("https://selenium.obsqurazone.com/check-box-demo.php");
         WebElement singleCheckBox = driver.findElement(By.xpath("//div//div[@class='card-body']//div[@class='form-check']//input[@class='form-check-input']"));
         Assert.assertFalse(singleCheckBox.isSelected(), "checkbox is  selected");

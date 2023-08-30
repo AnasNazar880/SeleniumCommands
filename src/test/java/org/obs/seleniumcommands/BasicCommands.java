@@ -4,10 +4,12 @@ import org.bouncycastle.util.Arrays;
 import org.checkerframework.framework.qual.DefaultQualifier;
 import org.obs.utility.RandomData;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import javax.swing.*;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -494,12 +496,47 @@ public class BasicCommands extends Base {
         for (int i = 0; i < options.size(); i++) {
             WebElement option = options.get(i);
             String dropDown = option.getText();
-            if(!dropDown.equals(selectedOption)){
+            if (!dropDown.equals(selectedOption)) {
                 option.click();
                 break;
             }
 
         }
+    }
+
+    @Test
+    public void verifyFileUploader() {
+        driver.get("https://the-internet.herokuapp.com/upload");
+        WebElement chooseFile = driver.findElement(By.xpath("//input[@id='file-upload']"));
+        chooseFile.sendKeys("C:\\selenium\\selenium.jpg.jpg");
+        WebElement uploadButton = driver.findElement(By.xpath("//input[@id='file-submit']"));
+        uploadButton.click();
+        String expectedMessage = "File Uploaded!";
+        WebElement actualMessag = driver.findElement(By.xpath("//div[@id='content']//div//h3"));
+        String actualMessage = actualMessag.getText();
+        Assert.assertEquals(actualMessage, expectedMessage, "file upload  failed");
+
+    }
+
+    @Test
+    public void verifyRightClick() {
+        driver.get("https://demo.guru99.com/test/simple_context_menu.html");
+        WebElement rightClick = driver.findElement(By.xpath("//span[@class='context-menu-one btn btn-neutral']"));
+        Actions action = new Actions(driver);
+        action.contextClick(rightClick).build().perform();//right click
+    }
+
+    @Test
+    public void verifyDoubleClick() {
+        driver.get("https://demo.guru99.com/test/simple_context_menu.html");
+        WebElement doubleClick = driver.findElement(By.xpath("//button[text()='Double-Click Me To See Alert']"));
+        Actions action = new Actions(driver);
+        action.doubleClick(doubleClick).build().perform();
+        Alert alert = driver.switchTo().alert();
+        String actualAlertText = alert.getText();
+        String expectedAlertText="You double clicked me.. Thank You..";
+        alert.accept();
+        Assert.assertEquals(actualAlertText,expectedAlertText,"alert message not shown as expected");
     }
 }
 

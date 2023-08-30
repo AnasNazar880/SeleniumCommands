@@ -14,9 +14,11 @@ public class RadioButtonDemo extends Base {
     }
 
     public void selectGender(String gender, List<WebElement> genders) {
+        String genderToSelect = "Male";
         for (int i = 0; i < genders.size(); i++) {
             WebElement gen = genders.get(i);
             String genValue = gen.getText();
+            Assert.assertEquals(genValue,genderToSelect,"the gender is not correctly selected");
             if (genValue.equals(gender)) {
                 gen.click();
             }

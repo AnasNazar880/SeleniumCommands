@@ -524,7 +524,16 @@ public class BasicCommands extends Base {
         WebElement rightClick = driver.findElement(By.xpath("//span[@class='context-menu-one btn btn-neutral']"));
         Actions action = new Actions(driver);
         action.contextClick(rightClick).build().perform();//right click
+        List<WebElement> dropDownOptions=driver.findElements(By.xpath("//ul[@class='context-menu-list context-menu-root']//li//span"));
+        String []expectedTexts={"Edit","Cut","Copy","Paste","Delete","Quit"};
+        for(int i=0;i<dropDownOptions.size();i++){
+            WebElement dropDown=dropDownOptions.get(i);
+            String actualTexts=dropDown.getText();
+            Assert.assertEquals(actualTexts,expectedTexts[i],"texts are not similar");
+        }
     }
+
+
 
     @Test
     public void verifyDoubleClick() {

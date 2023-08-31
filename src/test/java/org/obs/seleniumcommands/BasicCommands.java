@@ -532,9 +532,6 @@ public class BasicCommands extends Base {
             Assert.assertEquals(actualTexts,expectedTexts[i],"texts are not similar");
         }
     }
-
-
-
     @Test
     public void verifyDoubleClick() {
         driver.get("https://demo.guru99.com/test/simple_context_menu.html");

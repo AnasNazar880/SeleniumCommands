@@ -1,13 +1,17 @@
 package org.obs.homeWork;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import java.time.Duration;
+import java.time.Duration;
 import java.util.List;
 public class SelectInputDemo extends Base {
     @Test
-    public void singleInputDemo() {
+    public void verifySingleInputDemo() {
         driver.get("https://selenium.obsqurazone.com/select-input.php");
         WebElement singleInput = driver.findElement(By.xpath("//select[@id='single-input-field']"));
         Select select = new Select(singleInput);
@@ -34,7 +38,7 @@ public class SelectInputDemo extends Base {
         }
     }
     @Test
-    public void multipleInputFields() {
+    public void verifyMultipleInputFields() throws InterruptedException {
         driver.get("https://selenium.obsqurazone.com/select-input.php");
         WebElement selectColor = driver.findElement(By.xpath("//select[@id='multi-select-field']"));
         Select select = new Select(selectColor);
@@ -51,5 +55,11 @@ public class SelectInputDemo extends Base {
             String actualColours = colour.getText();
             Assert.assertEquals(actualColours, expectedColours[i], "Selected Colour does not match with actual colour");
         }
+        WebElement getAllSelectedButton=driver.findElement(By.xpath("//button[@id='button-all']"));
+        getAllSelectedButton.click();
+        String expectedText="All selected colors are : Red,Yellow,Green";
+        WebElement actText=driver.findElement(By.xpath("//div[@id='message-two']"));
+        String actualText=actText.getText();
+        Assert.assertEquals(actualText,expectedText,"all selected colours are not selected");
     }
 }

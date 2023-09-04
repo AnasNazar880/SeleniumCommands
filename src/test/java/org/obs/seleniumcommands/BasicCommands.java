@@ -5,7 +5,9 @@ import org.checkerframework.framework.qual.DefaultQualifier;
 import org.obs.utility.RandomData;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -524,14 +526,15 @@ public class BasicCommands extends Base {
         WebElement rightClick = driver.findElement(By.xpath("//span[@class='context-menu-one btn btn-neutral']"));
         Actions action = new Actions(driver);
         action.contextClick(rightClick).build().perform();//right click
-        List<WebElement> dropDownOptions=driver.findElements(By.xpath("//ul[@class='context-menu-list context-menu-root']//li//span"));
-        String []expectedTexts={"Edit","Cut","Copy","Paste","Delete","Quit"};
-        for(int i=0;i<dropDownOptions.size();i++){
-            WebElement dropDown=dropDownOptions.get(i);
-            String actualTexts=dropDown.getText();
-            Assert.assertEquals(actualTexts,expectedTexts[i],"texts are not similar");
+        List<WebElement> dropDownOptions = driver.findElements(By.xpath("//ul[@class='context-menu-list context-menu-root']//li//span"));
+        String[] expectedTexts = {"Edit", "Cut", "Copy", "Paste", "Delete", "Quit"};
+        for (int i = 0; i < dropDownOptions.size(); i++) {
+            WebElement dropDown = dropDownOptions.get(i);
+            String actualTexts = dropDown.getText();
+            Assert.assertEquals(actualTexts, expectedTexts[i], "texts are not similar");
         }
     }
+
     @Test
     public void verifyDoubleClick() {
         driver.get("https://demo.guru99.com/test/simple_context_menu.html");
@@ -540,11 +543,133 @@ public class BasicCommands extends Base {
         action.doubleClick(doubleClick).build().perform();
         Alert alert = driver.switchTo().alert();
         String actualAlertText = alert.getText();
-        String expectedAlertText="You double clicked me.. Thank You..";
+        String expectedAlertText = "You double clicked me.. Thank You..";
         alert.accept();
-        Assert.assertEquals(actualAlertText,expectedAlertText,"alert message not shown as expected");
+        Assert.assertEquals(actualAlertText, expectedAlertText, "alert message not shown as expected");
+    }
+
+    @Test
+    public void verifyMoveToClickAndHold() {
+        driver.get("https://selenium08.blogspot.com/2020/01/click-and-hold.html");
+        WebElement tileA = driver.findElement(By.xpath("//ul[@id='sortable']//li[text()='A']"));
+        WebElement tileC = driver.findElement(By.xpath("//ul[@id='sortable']//li[text()='C']"));
+        Actions action = new Actions(driver);
+        action.moveToElement(tileA);
+        action.moveToElement(tileC);
+        // action.build().
+    }
+
+    @Test
+    public void verifyDragAndDrop() {
+        driver.get("https://demoqa.com/droppable");
+        WebElement dragMe = driver.findElement(By.xpath("//div[@id='draggable']"));
+        WebElement dropHere = driver.findElement(By.xpath("//div[@id='droppable']"));
+        Actions action = new Actions(driver);
+        action.dragAndDrop(dragMe, dropHere).build().perform();
+    }
+
+    @Test
+    public void verifyDragAndDropByOffset() {
+        driver.get("https://demoqa.com/dragabble");
+        WebElement dragMe = driver.findElement(By.id("dragBox"));
+        Actions action = new Actions(driver);
+        action.dragAndDropBy(dragMe, 150, 100).build().perform();
+
+    }
+
+    @Test
+    public void verifyMoveToElement() {
+        driver.get("https://demoqa.com/menu/");
+        WebElement mainItem2 = driver.findElement(By.xpath("//a[text()='Main Item 2']"));
+        Actions action = new Actions(driver);
+        action.moveToElement(mainItem2).build().perform();
+        WebElement subSubList = driver.findElement(By.xpath("//a[text()='SUB SUB LIST »']"));
+        action.moveToElement(subSubList).build().perform();
+        WebElement subSubItem1 = driver.findElement(By.xpath("//a[text()='Sub Sub Item 1']"));
+        action.moveToElement(subSubItem1).build().perform();
+    }
+
+    @Test
+    public void verifyProgressBar() {
+        driver.get("https://selenium.obsqurazone.com/range-sliders.php");
+        WebElement progressBar1 = driver.findElement(By.xpath("//div[@class='range']//input[@name='range']"));
+        Actions action = new Actions(driver);
+        action.moveToElement(progressBar1).clickAndHold().moveToElement(progressBar1, 83, 0).release().build().perform();
+    }
+
+    @Test
+    public void verifyTestFrames() {
+        driver.get("https://demoqa.com/frames");
+        // driver.switchTo().frame("frame1");//method overloading
+        //driver.switchTo().frame(1);
+        WebElement frame1 = driver.findElement(By.id("frame1"));
+        driver.switchTo().frame(frame1);
+        WebElement text = driver.findElement(By.id("sampleHeading"));
+        String sampleText = text.getText();
+        System.out.println(sampleText);
+        //driver.switchTo().parentFrame();//switch back to parent frame
+        driver.switchTo().defaultContent();//switch back to parent frame
+    }
+
+    @Test
+    public void verifyDefaultValue20() {
+        driver.get("https://selenium.obsqurazone.com/range-sliders.php");
+        WebElement progressBar2 = driver.findElement(By.xpath("//div[@class='range range-primary']//input"));
+        Actions action = new Actions(driver);
+        action.moveToElement(progressBar2).clickAndHold().moveToElement(progressBar2, 85, 0).release().build().perform();
+    }
+
+    @Test
+    public void verifyDefaultValue30() {
+        driver.get("https://selenium.obsqurazone.com/range-sliders.php");
+        WebElement progressBar3 = driver.findElement(By.xpath("//div[@class='range range-success']//input"));
+        Actions action = new Actions(driver);
+        action.moveToElement(progressBar3).clickAndHold().moveToElement(progressBar3, 78, 0).release().build().perform();
+
+    }
+
+    @Test
+    public void verifyDefaultValue40() {
+        driver.get("https://selenium.obsqurazone.com/range-sliders.php");
+        WebElement progressBar4 = driver.findElement(By.xpath("//div[@class='range range-info']//input"));
+        Actions action = new Actions(driver);
+        action.moveToElement(progressBar4).clickAndHold().moveToElement(progressBar4, 90, 0).release().build().perform();
+    }
+
+    @Test
+    public void verifyDefaultValue50() {
+        driver.get("https://selenium.obsqurazone.com/range-sliders.php");
+        WebElement progressBar5 = driver.findElement(By.xpath("//div[@class='range range-warning']//input"));
+        Actions action = new Actions(driver);
+        action.moveToElement(progressBar5).clickAndHold().moveToElement(progressBar5, 76, 0).release().build().perform();
+    }
+
+    @Test
+    public void verifyDefaultValue60() {
+        driver.get("https://selenium.obsqurazone.com/range-sliders.php");
+        WebElement progressBar6 = driver.findElement(By.xpath("//div[@class='range range-danger']//input"));
+        Actions action = new Actions(driver);
+        action.moveToElement(progressBar6).clickAndHold().moveToElement(progressBar6, 89, 0).release().build().perform();
+    }
+
+    @Test
+    public void verifyDraggableItemList() throws InterruptedException {
+        driver.get("https://selenium.obsqurazone.com/drag-drop.php");
+        Actions action = new Actions(driver);
+        WebElement dropHere = driver.findElement(By.xpath("//div[@id='mydropzone']"));
+        WebElement draggable1 = driver.findElement(By.xpath("//span[text()='Draggable n°1']"));
+        WebElement draggable2 = driver.findElement(By.xpath("//span[text()='Draggable n°2']"));
+        WebElement draggable3 = driver.findElement(By.xpath("//span[text()='Draggable n°3']"));
+        WebElement draggable4 = driver.findElement(By.xpath("//span[text()='Draggable n°4']"));
+        action.dragAndDrop(draggable1, dropHere).build().perform();
+        action.dragAndDrop(draggable2, dropHere).build().perform();
+        action.dragAndDrop(draggable3, dropHere).build().perform();
+        action.dragAndDrop(draggable4, dropHere).build().perform();
     }
 }
+
+
+
 
 
 

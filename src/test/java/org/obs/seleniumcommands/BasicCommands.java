@@ -748,12 +748,53 @@ public class BasicCommands extends Base {
         System.out.println("the number of rows will be :" + rowSize);
         System.out.println("the number of columns will be :" + columnSize);
         for (int i = 0; i < rowSize; i++) {
-            String country = actualTableValues.get(i).get(0);
-            if (country.equals("Island Trading")) {
+            String company = actualTableValues.get(i).get(0);
+            if (company.equals("Island Trading")) {
                 System.out.println(actualTableValues.get(i).get(1));
                 System.out.println(actualTableValues.get(i).get(2));
                 break;
             }
+        }
+    }
+
+    @Test
+    public void verifyUserManagementEdit() throws InterruptedException {
+        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+        WebElement userName = driver.findElement(By.xpath("//input[@class='oxd-input oxd-input--active'and @name='username']"));
+        userName.sendKeys("Admin");
+        WebElement passWord = driver.findElement(By.xpath("//input[@class='oxd-input oxd-input--active' and @name='password']"));
+        passWord.sendKeys("admin123");
+        WebElement loginButton = driver.findElement(By.xpath("//button[@class='oxd-button oxd-button--medium oxd-button--main orangehrm-login-button']"));
+        loginButton.click();
+        Thread.sleep(10000);
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+        List<WebElement> panels = driver.findElements(By.xpath("//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name']"));
+        selectPanels1("Admin", panels);
+        List<WebElement> rowElements = driver.findElements(By.xpath("//div[@class='oxd-table-card']"));
+        List<WebElement> columnElements = driver.findElements(By.xpath("//div[@class='oxd-table-header-cell oxd-padding-cell oxd-table-th']"));
+        List<ArrayList<String>> actualTableValues = TableUtility.get_Dynamic_TwoDimension_TablElemnts(rowElements, columnElements);
+        int rowSize = actualTableValues.size();
+        int columnSize = actualTableValues.get(0).size();
+        for (int i = 0; i < rowSize; i++) {
+            String userNames = actualTableValues.get(i).get(1);
+            if (userNames.equals("Alice.Duval")) {
+                System.out.println("the user role will be :" + actualTableValues.get(i).get(2));
+                System.out.println("the Employee name will be :" + actualTableValues.get(i).get(3));
+                break;
+            }
+        }
+    }
+
+    public void selectPanels1(String panel, List<WebElement> panels) {
+        for (int i = 0; i < panels.size(); i++) {
+            WebElement panel1 = panels.get(i);
+            String tagValue = panel1.getText();
+            if (tagValue.equals(panel)) {
+                panel1.click();
+                break;
+            }
+
         }
     }
 }

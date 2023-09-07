@@ -1,11 +1,8 @@
 package org.obs.utility;
-
 import org.openqa.selenium.WebElement;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 public class TableUtility {
     public static List<ArrayList<String>> get_Dynamic_TwoDimension_TablElemnts(List<WebElement> rowItems, List<WebElement> columnItems) {
         int rSize = rowItems.size() - 1;

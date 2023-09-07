@@ -3,6 +3,7 @@ package org.obs.seleniumcommands;
 import org.bouncycastle.util.Arrays;
 import org.checkerframework.framework.qual.DefaultQualifier;
 import org.obs.utility.RandomData;
+import org.obs.utility.TableUtility;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,6 +13,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -666,7 +668,97 @@ public class BasicCommands extends Base {
         action.dragAndDrop(draggable3, dropHere).build().perform();
         action.dragAndDrop(draggable4, dropHere).build().perform();
     }
+
+    @Test
+    public void verifyJavaScriptExecutor() {
+        driver.get("https://demowebshop.tricentis.com/login");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.getElementById('Email').value='muhammadanas.n@gmail.com';");
+        js.executeScript("document.getElementById('Password').value='Hyrin@2023';");
+        WebElement loginButton = driver.findElement(By.xpath("//input[@class='button-1 login-button']"));
+        js.executeScript("arguments[0].click();", loginButton);
+    }
+
+    @Test
+    public void verifySubscription() {
+        driver.get("https://demowebshop.tricentis.com/");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.getElementById('newsletter-email').value='anas@gmail.com';");
+        js.executeScript("document.getElementById('newsletter-subscribe-button').click();");
+        String title = js.executeScript("return document.title;").toString();
+        System.out.println(title);
+    }
+
+    @Test
+    public void verifyVerticalScroll() {
+        driver.get("https://demowebshop.tricentis.com/");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,500);");
+    }
+
+    @Test
+    public void verifyHorizontalScroll() {//scroll horizontally by a certain defined distance
+        driver.get("https://demo.guru99.com/test/guru99home/scrolling.html");
+        WebElement vbScript = driver.findElement(By.xpath("//a[text()='VBScript']"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView();", vbScript);
+    }
+
+    @Test
+    public void verifyScrollIntoTotalHeight() {
+        driver.get("https://demo.guru99.com/test/guru99home/");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0,document.body.scrollHeight);");
+    }
+
+    @Test
+    public void verifyVerticalScrollIntoView() {
+        driver.get("https://demo.guru99.com/test/guru99home/");
+        WebElement linuxButton = driver.findElement(By.xpath("//a[text()='Linux']"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView();", linuxButton);
+    }
+
+    @Test
+    public void verifyCompanyDetails() {
+        driver.get("https://www.w3schools.com/html/html_tables.asp");
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='customers']//tr"));
+        for (int i = 2; i < rows.size(); i++) {
+            WebElement company = driver.findElement(By.xpath("//table[@id='customers']//tr[" + i + "]//td[1]"));
+            String companyValue = company.getText();
+            if (companyValue.equals("Island Trading")) {
+                WebElement contact = driver.findElement(By.xpath("//table[@id='customers']//tr[" + i + "]//td[2]"));
+                System.out.println(contact.getText());
+                WebElement country = driver.findElement(By.xpath("//table[@id='customers']//tr[" + i + "]//td[3]"));
+                System.out.println(country.getText());
+                break;
+            }
+        }
+    }
+
+    @Test
+    public void verifyTableValues() {
+        driver.get("https://www.w3schools.com/html/html_tables.asp");
+        List<WebElement> rowElements = driver.findElements(By.xpath("//table[@id='customers']//tr"));
+        List<WebElement> columnElements = driver.findElements(By.xpath("//table[@id='customers']//tr//td"));
+        List<ArrayList<String>> actualTableValues = TableUtility.get_Dynamic_TwoDimension_TablElemnts(rowElements, columnElements);
+        System.out.println(actualTableValues);
+        int rowSize = actualTableValues.size();
+        int columnSize = actualTableValues.get(0).size();
+        System.out.println("the number of rows will be :" + rowSize);
+        System.out.println("the number of columns will be :" + columnSize);
+        for (int i = 0; i < rowSize; i++) {
+            String country = actualTableValues.get(i).get(0);
+            if (country.equals("Island Trading")) {
+                System.out.println(actualTableValues.get(i).get(1));
+                System.out.println(actualTableValues.get(i).get(2));
+                break;
+            }
+        }
+    }
 }
+
+
 
 
 

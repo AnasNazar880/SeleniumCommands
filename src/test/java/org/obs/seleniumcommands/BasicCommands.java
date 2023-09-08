@@ -6,16 +6,16 @@ import org.obs.utility.RandomData;
 import org.obs.utility.TableUtility;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import javax.swing.*;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 public class BasicCommands extends Base {
@@ -777,7 +777,7 @@ public class BasicCommands extends Base {
         int rowSize = actualTableValues.size();
         int columnSize = actualTableValues.get(0).size();
         for (int i = 0; i < rowSize; i++) {
-            String userNames = actualTableValues.get(i).get(1);
+            String userNames = actualTableValues.get(i).get(0);
             if (userNames.equals("Alice.Duval")) {
                 System.out.println("the user role will be :" + actualTableValues.get(i).get(2));
                 System.out.println("the Employee name will be :" + actualTableValues.get(i).get(3));
@@ -796,6 +796,88 @@ public class BasicCommands extends Base {
             }
 
         }
+    }
+
+    @Test
+    public void verifyImplicitWait() {
+        driver.get("https://demowebshop.tricentis.com/");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        WebElement login = driver.findElement(By.xpath("//a[text()='Log in']"));
+        login.click();
+        WebElement email = driver.findElement(By.xpath("//input[@id='Email']"));
+        String emailId = "anas1@gmail.com";
+        email.sendKeys(emailId);
+        WebElement password = driver.findElement(By.xpath("//input[@id='Password']"));
+        String pass1 = "Izin@2020";
+        password.sendKeys(pass1);
+        WebElement loginClick = driver.findElement(By.xpath("//input[@class='button-1 login-button']"));
+        loginClick.click();
+    }
+
+    @Test
+    public void verifyExplicitWait() {
+        driver.get("https://demowebshop.tricentis.com/");
+        WebElement login = driver.findElement(By.xpath("//a[text()='Log in']"));
+        login.click();
+        WebElement email = driver.findElement(By.xpath("//input[@id='Email']"));
+        email.sendKeys("anas1@gmail.com");
+        WebElement password = driver.findElement(By.xpath("//input[@id='Password']"));
+        password.sendKeys("Izin@2020");
+        WebElement loginClick = driver.findElement(By.xpath("//input[@class='button-1 login-button']"));
+        loginClick.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='header-links']//a[@class='account']")));
+        WebElement userAccountEmail = driver.findElement(By.xpath("//div[@class='header-links']//a[@class='account']"));
+        userAccountEmail.getText();
+        String actualEmailId = userAccountEmail.getText();
+        Assert.assertEquals(actualEmailId, "anas1@gmail.com", "login failed");
+    }
+
+    @Test
+    public void verifyWaitForAlertToBePresent() {
+        driver.get("https://demoqa.com/alerts");
+        WebElement confAlertOk = driver.findElement(By.xpath("//button[@id='timerAlertButton']"));
+        confAlertOk.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.alertIsPresent());
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+    }
+
+    @Test
+    public void verifyFluentWait() {
+        driver.get("https://demowebshop.tricentis.com/");
+        WebElement login = driver.findElement(By.xpath("//a[text()='Log in']"));
+        login.click();
+        WebElement email = driver.findElement(By.xpath("//input[@id='Email']"));
+        email.sendKeys("anas1@gmail.com");
+        WebElement password = driver.findElement(By.xpath("//input[@id='Password']"));
+        password.sendKeys("Izin@2020");
+        WebElement loginClick = driver.findElement(By.xpath("//input[@class='button-1 login-button']"));
+        loginClick.click();
+        FluentWait wait = new FluentWait(driver);
+        wait.withTimeout(Duration.ofSeconds(20));
+        wait.pollingEvery(Duration.ofSeconds(2));
+        wait.ignoring(NoSuchElementException.class);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='header-links']//a[@class='account']")));
+        WebElement userAccountEmail = driver.findElement(By.xpath("//div[@class='header-links']//a[@class='account']"));
+        userAccountEmail.getText();
+        String actualEmailId = userAccountEmail.getText();
+        Assert.assertEquals(actualEmailId, "anas1@gmail.com", "login failed");
+    }
+
+    @Test
+    public void verifyFluentWaitForAlertToBePresent() {
+        driver.get("https://demoqa.com/alerts");
+        WebElement confAlertOk = driver.findElement(By.xpath("//button[@id='timerAlertButton']"));
+        confAlertOk.click();
+        FluentWait wait=new FluentWait<>(driver);
+        wait.withTimeout(Duration.ofSeconds(10));
+        wait.pollingEvery(Duration.ofSeconds(2));
+        wait.ignoring(NoSuchElementException.class);
+        wait.until(ExpectedConditions.alertIsPresent());
+        Alert alert=driver.switchTo().alert();
+        alert.accept();
     }
 }
 

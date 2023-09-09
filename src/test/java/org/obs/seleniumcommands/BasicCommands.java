@@ -1,7 +1,5 @@
 package org.obs.seleniumcommands;
 
-import org.bouncycastle.util.Arrays;
-import org.checkerframework.framework.qual.DefaultQualifier;
 import org.obs.utility.RandomData;
 import org.obs.utility.TableUtility;
 import org.openqa.selenium.*;
@@ -10,7 +8,6 @@ import org.openqa.selenium.support.ui.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import javax.swing.*;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -844,7 +841,7 @@ public class BasicCommands extends Base {
         alert.accept();
     }
 
-    @Test
+    @Test 
     public void verifyFluentWait() {
         driver.get("https://demowebshop.tricentis.com/");
         WebElement login = driver.findElement(By.xpath("//a[text()='Log in']"));

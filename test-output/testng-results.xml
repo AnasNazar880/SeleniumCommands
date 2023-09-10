@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="6" passed="5" failed="1" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2023-09-09T10:23:18 IST" name="Regression Suite" finished-at="2023-09-09T10:24:16 IST" duration-ms="57480">
+    <groups>
+    </groups>
+    <test started-at="2023-09-09T10:23:18 IST" name="Non functional test " finished-at="2023-09-09T10:23:40 IST" duration-ms="21459">
+      <class name="org.obs.testngbasics.RegisterPageTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:org.obs.testngbasics.RegisterPageTest@73700b80]" started-at="2023-09-09T10:23:33 IST" name="setUp" finished-at="2023-09-09T10:23:39 IST" duration-ms="5515" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifyRegisterPageTitle()[pri:0, instance:org.obs.testngbasics.RegisterPageTest@73700b80]" started-at="2023-09-09T10:23:39 IST" name="verifyRegisterPageTitle" finished-at="2023-09-09T10:23:40 IST" duration-ms="718" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyRegisterPageTitle -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.obs.testngbasics.RegisterPageTest@73700b80]" started-at="2023-09-09T10:23:40 IST" name="tearDown" finished-at="2023-09-09T10:23:40 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- org.obs.testngbasics.RegisterPageTest -->
+      <class name="org.obs.testngbasics.HomePageTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:org.obs.testngbasics.HomePageTest@11bd0f3b]" started-at="2023-09-09T10:23:18 IST" name="setUp" finished-at="2023-09-09T10:23:26 IST" duration-ms="8247" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifyHomePageTitle()[pri:0, instance:org.obs.testngbasics.HomePageTest@11bd0f3b]" started-at="2023-09-09T10:23:26 IST" name="verifyHomePageTitle" finished-at="2023-09-09T10:23:26 IST" duration-ms="29" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyHomePageTitle -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.obs.testngbasics.HomePageTest@11bd0f3b]" started-at="2023-09-09T10:23:26 IST" name="tearDown" finished-at="2023-09-09T10:23:26 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- org.obs.testngbasics.HomePageTest -->
+      <class name="org.obs.testngbasics.LoginPageTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:org.obs.testngbasics.LoginPageTest@6f46426d]" started-at="2023-09-09T10:23:26 IST" name="setUp" finished-at="2023-09-09T10:23:33 IST" duration-ms="6119" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifyLoginPageTitle()[pri:0, instance:org.obs.testngbasics.LoginPageTest@6f46426d]" started-at="2023-09-09T10:23:33 IST" name="verifyLoginPageTitle" finished-at="2023-09-09T10:23:33 IST" duration-ms="725" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyLoginPageTitle -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.obs.testngbasics.LoginPageTest@6f46426d]" started-at="2023-09-09T10:23:33 IST" name="tearDown" finished-at="2023-09-09T10:23:33 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- org.obs.testngbasics.LoginPageTest -->
+    </test> <!-- Non functional test  -->
+    <test started-at="2023-09-09T10:23:40 IST" name="functional test " finished-at="2023-09-09T10:24:16 IST" duration-ms="35964">
+      <class name="org.obs.testngbasics.RegisterPageTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:org.obs.testngbasics.RegisterPageTest@614ca7df]" started-at="2023-09-09T10:24:03 IST" name="setUp" finished-at="2023-09-09T10:24:10 IST" duration-ms="6907" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifyUserRegistration()[pri:0, instance:org.obs.testngbasics.RegisterPageTest@614ca7df]" started-at="2023-09-09T10:24:10 IST" name="verifyUserRegistration" finished-at="2023-09-09T10:24:16 IST" duration-ms="5458" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyUserRegistration -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.obs.testngbasics.RegisterPageTest@614ca7df]" started-at="2023-09-09T10:24:16 IST" name="tearDown" finished-at="2023-09-09T10:24:16 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- org.obs.testngbasics.RegisterPageTest -->
+      <class name="org.obs.testngbasics.HomePageTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:org.obs.testngbasics.HomePageTest@7e7be63f]" started-at="2023-09-09T10:23:40 IST" name="setUp" finished-at="2023-09-09T10:23:48 IST" duration-ms="8341" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifySubscriberMessage()[pri:0, instance:org.obs.testngbasics.HomePageTest@7e7be63f]" started-at="2023-09-09T10:23:48 IST" name="verifySubscriberMessage" finished-at="2023-09-09T10:23:48 IST" duration-ms="353" status="FAIL">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Email Subscription is failed expected [Thank you for signing up! A verification email has been sent. We appreciate your interest.] but found []]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Email Subscription is failed expected [Thank you for signing up! A verification email has been sent. We appreciate your interest.] but found []
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1578)
+at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+at org.testng.Assert.assertEquals(Assert.java:132)
+at org.testng.Assert.assertEquals(Assert.java:656)
+at org.obs.testngbasics.HomePageTest.verifySubscriberMessage(HomePageTest.java:23)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+at org.testng.TestRunner.privateRun(TestRunner.java:848)
+at org.testng.TestRunner.run(TestRunner.java:621)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+at org.testng.TestNG.runSuites(TestNG.java:1114)
+at org.testng.TestNG.run(TestNG.java:1082)
+at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:66)
+at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:105)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifySubscriberMessage -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.obs.testngbasics.HomePageTest@7e7be63f]" started-at="2023-09-09T10:23:48 IST" name="tearDown" finished-at="2023-09-09T10:23:48 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- org.obs.testngbasics.HomePageTest -->
+      <class name="org.obs.testngbasics.LoginPageTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:org.obs.testngbasics.LoginPageTest@6cd28fa7]" started-at="2023-09-09T10:23:48 IST" name="setUp" finished-at="2023-09-09T10:24:00 IST" duration-ms="11834" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifyUserLogin()[pri:0, instance:org.obs.testngbasics.LoginPageTest@6cd28fa7]" started-at="2023-09-09T10:24:00 IST" name="verifyUserLogin" finished-at="2023-09-09T10:24:03 IST" duration-ms="3050" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyUserLogin -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.obs.testngbasics.LoginPageTest@6cd28fa7]" started-at="2023-09-09T10:24:03 IST" name="tearDown" finished-at="2023-09-09T10:24:03 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- org.obs.testngbasics.LoginPageTest -->
+    </test> <!-- functional test  -->
+  </suite> <!-- Regression Suite -->
+</testng-results>

@@ -876,6 +876,18 @@ public class BasicCommands extends Base {
         Alert alert=driver.switchTo().alert();
         alert.accept();
     }
+    @Test
+    public void verifySubscriberMessage(){
+        driver.get("https://demowebshop.tricentis.com/");
+        WebElement emailField=driver.findElement(By.xpath("//input[@id='newsletter-email']"));
+        emailField.sendKeys("anas@gmail.com");
+        WebElement subscribeButton=driver.findElement(By.xpath("//input[@id='newsletter-subscribe-button']"));
+        subscribeButton.click();
+        WebElement actualTextElement=driver.findElement(By.xpath("//div[@id='newsletter-result-block']"));
+        String actualTextMessage=actualTextElement.getText();
+        String expectedTextMessage="Thank you for signing up! A verification email has been sent. We appreciate your interest.";
+        Assert.assertEquals(actualTextMessage,expectedTextMessage,"Email Subscription is failed");
+    }
 }
 
 

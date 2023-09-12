@@ -8,6 +8,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.time.Duration;
+
 public class Base {
     WebDriver driver;
 
@@ -28,9 +30,10 @@ public class Base {
     @BeforeMethod
     public void setUp() {
         initializeTest("chrome");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
     @AfterMethod
     public void tearDown() {
-        //driver.close();
+        driver.close();
     }
 }

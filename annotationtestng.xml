@@ -15,28 +15,10 @@
                     <include name="verifyLoginPageTitle"/>
                 </methods>
             </class>
-            <class name="org.obs.testngbasics.RegisterPageTest">
-                <methods>
-                    <exclude name="verifyUserRegistration"/>
-                    <include name="verifyRegisterPageTitle"/>
-                </methods>
-            </class>
         </classes>
     </test>
     <test  name="functional test ">
         <classes>
-            <class name="org.obs.testngbasics.HomePageTest">
-                <methods>
-                    <exclude name="verifyHomePageTitle"/>
-                    <include name="verifySubscriberMessage"/>
-                </methods>
-            </class>
-            <class name="org.obs.testngbasics.LoginPageTest">
-                <methods>
-                    <include name="verifyUserLogin"/>
-                    <exclude name="verifyLoginPageTitle"/>
-                </methods>
-            </class>
             <class name="org.obs.testngbasics.RegisterPageTest">
                 <methods>
                     <include name="verifyUserRegistration"/>

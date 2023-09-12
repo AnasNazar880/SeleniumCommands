@@ -5,8 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
 
 public class Base {
     WebDriver driver;
@@ -25,14 +24,49 @@ public class Base {
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
     }
+
     @BeforeMethod
-    public void setUp() {
-        initializeTest("chrome");
-        driver.get("https://demowebshop.tricentis.com/");
+    @Parameters({"browser","baseurl"})
+    public void setUp(String browserName,String url) {
+        //initializeTest("chrome");
+        //driver.get("https://demowebshop.tricentis.com/");
+        initializeTest(browserName);
+        driver.get(url);
     }
+
 
     @AfterMethod
     public void tearDown() {
-        //driver.close();
+        driver.close();
     }
+
+    @BeforeSuite
+    public void connectDB() {
+        System.out.println("connected to database");
+    }
+
+    @AfterSuite
+    public void closeDB() {
+        System.out.println("close database");
+    }
+
+    @BeforeTest
+    public void runLoginAPI() {
+        System.out.println("run in login API");
+    }
+
+    @AfterTest
+    public void runLogOutAPI() {
+        System.out.println(" logout API");
+    }
+    @BeforeClass
+    public void createTestTable(){
+        System.out.println("create test table");
+    }
+    @AfterClass
+    public void dropTestTable(){
+        System.out.println("drop test table");
+    }
+
+
 }

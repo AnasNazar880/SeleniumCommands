@@ -31,5 +31,22 @@ public class LoginPageTest extends Base{
         String expectedLoginTitle="Demo Web Shop. Login";
         Assert.assertEquals(actualLoginTitle,expectedLoginTitle,"login page title mismatch");
     }
+    @Test(dataProvider = "userCredentials" ,dataProviderClass = LoginDataProvider.class)
+    public void verifyInvalidUserLogin(String uName,String pWord){
+        WebElement login = driver.findElement(By.xpath("//a[text()='Log in']"));
+        login.click();
+        WebElement email = driver.findElement(By.xpath("//input[@id='Email']"));
+        String  emailId = uName;
+        email.sendKeys(emailId);
+        WebElement password = driver.findElement(By.xpath("//input[@id='Password']"));
+        String pass1 =pWord;
+        password.sendKeys(pass1);
+        WebElement loginClick = driver.findElement(By.xpath("//input[@class='button-1 login-button']"));
+        loginClick.click();
+        WebElement errorMessage= driver.findElement(By.xpath("//div[@class='validation-summary-errors']//span"));
+       String actualErrorMessage= errorMessage.getText();
+       String expectedErrorMessage="Login was unsuccessful. Please correct the errors and try again.";
+       Assert.assertEquals(actualErrorMessage,expectedErrorMessage,"error message not displayed");
+    }
 
 }

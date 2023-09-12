@@ -5,7 +5,11 @@
         <parameter name="browser" value="chrome"/>
         <parameter name="baseurl" value="https://demowebshop.tricentis.com/"/>
         <classes>
-            <class name="org.obs.testngbasics.LoginPageTest"/>
+            <class name="org.obs.testngbasics.LoginPageTest">
+                <methods>
+                    <include name="verifyInvalidUserLogin"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

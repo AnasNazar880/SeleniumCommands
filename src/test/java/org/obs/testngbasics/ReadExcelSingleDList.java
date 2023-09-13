@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ReadExcelSingleDList {
     public static void main(String[] args) {
-        String excelFilePath = "D:\\Obsquira\\ReadExcell\\readExcell.xlsx"; // Replace with your file path
+        String excelFilePath = "D:\\Obsquira\\ReadExcell\\readExcell.xlsx"; //  file path
 
         try (FileInputStream inputStream = new FileInputStream(excelFilePath);
              Workbook workbook = WorkbookFactory.create(inputStream)) {

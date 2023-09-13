@@ -1,16 +1,13 @@
 package org.obs.utility;
-
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.obs.constants.Constants;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 public class ExcelUtility {
     public static XSSFWorkbook wb;
     public static XSSFSheet sh;
@@ -62,7 +59,7 @@ public class ExcelUtility {
     public Object[][] dataProviderRead(String sheetName) {
         DataFormatter formatter = new DataFormatter();
         try {
-            f = new FileInputStream(System.getProperty("user.dir") + Constants.EXCEL_PATH);
+            f = new FileInputStream(System.getProperty("user.dir") + Constants.DATAPROVIDER_EXCEL_PATH);
             wb = new XSSFWorkbook(f);
             sh = wb.getSheet(sheetName);
             int rows = sh.getLastRowNum() + 1;

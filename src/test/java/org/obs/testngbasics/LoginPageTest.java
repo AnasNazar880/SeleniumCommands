@@ -31,7 +31,7 @@ public class LoginPageTest extends Base{
         String expectedLoginTitle="Demo Web Shop. Login";
         Assert.assertEquals(actualLoginTitle,expectedLoginTitle,"login page title mismatch");
     }
-    @Test(dataProvider = "userCredentials" ,dataProviderClass = LoginDataProvider.class)
+    @Test(dataProvider = "userCredentialsFromExcel" ,dataProviderClass = LoginDataProvider.class)
     public void verifyInvalidUserLogin(String uName,String pWord){
         WebElement login = driver.findElement(By.xpath("//a[text()='Log in']"));
         login.click();

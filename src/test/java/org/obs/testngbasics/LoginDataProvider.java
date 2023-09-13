@@ -1,5 +1,6 @@
 package org.obs.testngbasics;
 
+import org.obs.utility.ExcelUtility;
 import org.testng.annotations.DataProvider;
 
 public class LoginDataProvider {
@@ -25,6 +26,13 @@ public class LoginDataProvider {
         loginData[2][0] = "administer";
         loginData[2][1] = "admins456";
         return loginData;
+    }
+
+    @DataProvider(name = "userCredentialsFromExcel")
+    public Object[][] userCredentialsFromExcel() {
+        ExcelUtility excel = new ExcelUtility();
+        Object[][] data = excel.dataProviderRead("verifyInvalidLogin");
+        return data;
     }
 }
 

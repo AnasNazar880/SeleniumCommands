@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Orange login">
+    <test  name="Orange login credentials">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="baseurl" value="https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"/>
+        <classes>
+            <class name="org.obs.testngbasics.InvalidOrangeLoginCredentials"/>
+        </classes>
+    </test>
+</suite>

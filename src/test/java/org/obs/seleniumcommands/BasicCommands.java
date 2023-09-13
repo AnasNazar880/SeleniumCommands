@@ -757,13 +757,16 @@ public class BasicCommands extends Base {
     @Test
     public void verifyUserManagementEdit() throws InterruptedException {
         driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='username']")));
         WebElement userName = driver.findElement(By.xpath("//input[@class='oxd-input oxd-input--active'and @name='username']"));
         userName.sendKeys("Admin");
         WebElement passWord = driver.findElement(By.xpath("//input[@class='oxd-input oxd-input--active' and @name='password']"));
         passWord.sendKeys("admin123");
         WebElement loginButton = driver.findElement(By.xpath("//button[@class='oxd-button oxd-button--medium oxd-button--main orangehrm-login-button']"));
         loginButton.click();
-        Thread.sleep(10000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='oxd-text oxd-text--p oxd-alert-content-text']")));
+        wait.until(ExpectedConditions.alertIsPresent());
         Alert alert = driver.switchTo().alert();
         alert.accept();
         List<WebElement> panels = driver.findElements(By.xpath("//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name']"));

@@ -48,5 +48,4 @@ public class LoginPageTest extends Base{
        String expectedErrorMessage="Login was unsuccessful. Please correct the errors and try again.";
        Assert.assertEquals(actualErrorMessage,expectedErrorMessage,"error message not displayed");
     }
-
 }
